@@ -1,0 +1,33 @@
+mixin group-block(group)
+    div.col-md-3
+        table.table.table-striped
+            tr
+                td
+                    b ID:
+                td
+                    p#group-id #{group.id}
+            tr
+                td
+                    b Name: 
+                td
+                    p #{group.name}
+            tr
+                td
+                    b Description:
+                td
+                    p #{group.description}
+            tr
+                td.text-center(colspan=2)
+                    if(group.deletable)
+                        form(method="POST", action='deleteGroup')
+                            input(type="hidden", value=group.id, name="id")
+                            button.btn.btn-danger(type="submit")
+                                span.fa.fa-trash
+                                |  Remove
+                    if(group.joinable)
+                        form(method="POST", action='joinGroup')
+                            input(type="hidden", value=group.id, name="id")
+                            button.btn.btn-success(type="submit")
+                                span.fa.fa-plus
+                                |  Join
+    div.col-md-1

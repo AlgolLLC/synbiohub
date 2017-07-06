@@ -1,0 +1,29 @@
+
+extends ../layouts/default.jade
+
+include ../mixins/group.jade
+
+block content
+    for group in groups
+        #{group.name}
+        +group-block(group)
+    div.col-md-3
+        form(method="POST", action='createGroup', id="createGroup", enctype="multipart/form-data")
+            table.table.table-striped
+                tr
+                    td
+                        b Name: 
+                    td
+                        input.form-control(name="name", id="name")
+                tr
+                    td
+                        b Description:
+                    td
+                        textarea.form-control(name="description", form="createGroup", id="description")
+                tr
+                        
+                tr
+                    td.text-center(colspan=2)
+                        button.btn.btn-success(type="submit")
+                            span.fa.fa-plus
+                            |  Add

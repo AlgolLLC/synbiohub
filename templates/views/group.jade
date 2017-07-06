@@ -1,0 +1,70 @@
+
+extends ../layouts/default.jade
+
+block head
+    style.
+        body {
+            background-color: #f6f6f6;
+        }
+
+        .grey-page-mark {
+            background-color: #f6f6f6;
+        }
+
+        .top-search-form {
+            display: none;
+        }
+
+        .main-search-form input {
+            width: 60%;
+            margin-left: 0;
+            background-color: white;
+            padding: 14px 16px 13px 32px;
+        }
+
+        .main-search-form .submit {
+            padding: 12px 21px;
+        }
+
+        .main-search-form label {
+            color: #7F8C8D;
+        }
+
+        .search-section {
+            height: 60px;
+            padding: 20px;
+            margin: 0 auto;
+            width: 50%;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+block modal
+    div.modal.fade#iconModal(tabindex="-1", role="dialog")
+        div.modal-dialog(role="document")
+            div.modal-content
+                div.modal-header
+                    button.close(type="button", data-dismiss="modal", arial-label="close")
+                        span(aria-hidden="true") &times;
+                    h4.modal-title Change Collection Icon
+                div.modal-body
+                    div.row
+                        div.col-sm-6
+                            if (collectionIcon)
+                                h5 Current Icon
+                                img(src=collectionIcon, style="width: 100%")
+                            else
+                                h5 No Icon Set!
+                        div.col-sm-6
+                            h5 Upload New Icon
+                            form#iconForm.form(method="POST", enctype="multipart/form-data", action=url + '/icon')
+                                input(type="hidden", value=meta.url, name="collectionUrl")
+                                input(type="hidden", value=meta.uri, name="collectionUri")
+                                input.form-control(type="file", name="collectionIcon")
+
+                div.modal-footer
+                    button.btn.btn-danger(data-dismiss="modal") Close
+                    button.btn.btn-primary(type="submit", form="iconForm") Save changes
+
+block content
+
