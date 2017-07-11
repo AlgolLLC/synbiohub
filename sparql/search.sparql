@@ -1,3 +1,4 @@
+DEFINE input:named-graph-uri <http://identifers.org/so/>
 PREFIX sbol2: <http://sbols.org/v2#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX ncbi: <http://www.ncbi.nlm.nih.gov#>
@@ -6,6 +7,7 @@ PREFIX sbh: <http://wiki.synbiohub.org/wiki/Terms/synbiohub#>
 PREFIX igem: <http://wiki.synbiohub.org/wiki/Terms/igem#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
+
 SELECT DISTINCT
     ?subject
     ?displayId
@@ -13,6 +15,7 @@ SELECT DISTINCT
     ?name
     ?description
     ?type
+    ?role
 WHERE {
     $criteria
     { ?subject a sbol2:ComponentDefinition } UNION 
@@ -21,6 +24,7 @@ WHERE {
     { ?subject a sbol2:Sequence } UNION 
     { ?subject a sbol2:Model } .
     ?subject a ?type
+    OPTIONAL { ?subject sbol2:role ?role . }
     OPTIONAL { ?subject sbol2:displayId ?displayId . }
     OPTIONAL { ?subject sbol2:version ?version . }
     OPTIONAL { ?subject dcterms:title ?name . }
